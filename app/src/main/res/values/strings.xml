@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Kelas Online</string>
+    <string name="label_info">Pastikan email anda telah terdaftar menjadi peserta atau anggota aktif</string>
+    <string name="btn_login">Masuk</string>
+    <string name="ed_password">Password</string>
+    <string name="et_email">Email</string>
+    <string name="label_subtitle">Masuk dengan Email dan Password</string>
+    <string name="label_title">Masuk</string>
+</resources>
