@@ -1,5 +1,6 @@
 package com.farhandev.kelasonline.ui.login
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Looper
@@ -8,6 +9,8 @@ import com.farhandev.kelasonline.R
 import com.farhandev.kelasonline.databinding.ActivityLoginBinding
 import com.farhandev.kelasonline.network.ApiClient
 import com.farhandev.kelasonline.network.response.login.LoginResponse
+import com.farhandev.kelasonline.preference.PrefManager
+import com.farhandev.kelasonline.ui.home.HomeActivity
 
 class LoginActivity : AppCompatActivity(), LoginView {
     private lateinit var activityLoginBinding: ActivityLoginBinding
@@ -18,10 +21,10 @@ class LoginActivity : AppCompatActivity(), LoginView {
         activityLoginBinding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(activityLoginBinding.root)
 
-        presenter = LoginPresenter(this, ApiClient.getService())
+        presenter = LoginPresenter(this, ApiClient.getService(), PrefManager(this))
 
-//        activityLoginBinding.etEmail.setText("taufik@gmail.com")
-//        activityLoginBinding.etPassword.setText("taufik@gmail.com")
+        activityLoginBinding.etEmail.setText("taufik@gmail.com")
+        activityLoginBinding.etPassword.setText("taufik@gmail.com")
     }
 
     override fun setupListener() {
@@ -42,8 +45,13 @@ class LoginActivity : AppCompatActivity(), LoginView {
     }
 
     override fun loginResponse(response: LoginResponse) {
+        Toast.makeText(applicationContext, response.msg, Toast.LENGTH_SHORT).show()
         when(response.status){
-            true -> Toast.makeText(applicationContext, response.msg, Toast.LENGTH_SHORT).show()
+            true -> {
+                presenter.saveLogin(response.data!!)
+                startActivity(Intent(this, HomeActivity::class.java))
+                finish()
+            }
             false -> Toast.makeText(applicationContext, response.msg, Toast.LENGTH_SHORT).show()
         }
     }

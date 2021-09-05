@@ -6,6 +6,7 @@ import android.os.Handler
 import android.os.Looper
 import com.farhandev.kelasonline.ui.BaseActivity
 import com.farhandev.kelasonline.R
+import com.farhandev.kelasonline.preference.PrefManager
 import com.farhandev.kelasonline.ui.home.HomeActivity
 import com.farhandev.kelasonline.ui.login.LoginActivity
 
@@ -13,7 +14,7 @@ class SplashActivity : BaseActivity(),SplashView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-        SplashPresenter(this)
+        SplashPresenter(this, PrefManager(this))
     }
 
     override fun nextPage(isLogin: Int) {
