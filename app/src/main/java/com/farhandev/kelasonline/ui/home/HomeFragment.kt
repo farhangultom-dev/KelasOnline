@@ -6,14 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.farhandev.kelasonline.R
+import com.farhandev.kelasonline.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
+    private lateinit var fragmentHomeBinding: FragmentHomeBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        fragmentHomeBinding = FragmentHomeBinding.inflate(inflater,container, false)
+        return fragmentHomeBinding.root
     }
 }

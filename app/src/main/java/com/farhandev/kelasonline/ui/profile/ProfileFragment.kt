@@ -9,12 +9,14 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.farhandev.kelasonline.R
 import com.farhandev.kelasonline.databinding.FragmentProfileBinding
+import com.farhandev.kelasonline.network.response.login.Data
 import com.farhandev.kelasonline.preference.PrefManager
 import com.farhandev.kelasonline.ui.login.LoginActivity
 
 class ProfileFragment : Fragment(), ProfileView {
     private lateinit var fragmentProfileBinding: FragmentProfileBinding
     private lateinit var presenter: ProfilePresenter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -25,11 +27,15 @@ class ProfileFragment : Fragment(), ProfileView {
         return fragmentProfileBinding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun setUpListener() {
         fragmentProfileBinding.btnLgout.setOnClickListener {
             presenter.logout()
         }
+    }
+
+    override fun user(user: Data) {
+        fragmentProfileBinding.tvNama.text = user.name
+        fragmentProfileBinding.tvEmail.text = user.email
     }
 
     override fun logout() {
